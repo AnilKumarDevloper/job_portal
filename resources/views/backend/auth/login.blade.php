@@ -140,8 +140,8 @@
   </section>
 
   <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="script/script.js"></script>
+  <!-- <script src="{{ url('assets/backend/dist/') }}"></script> -->
+  <script src="{{ url('assets/frontend/script/script.js') }}"></script>
 
 </body>
-
 </html>

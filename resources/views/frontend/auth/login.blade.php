@@ -44,6 +44,14 @@
         .headings{
             font-size: 22px;
         }
+        .eye_elements{
+             position: absolute;
+            top: 50%;
+            right: 5px;
+            transform: translateY(-50%);
+            font-size: 14px;
+            cursor: pointer;
+        }
    </style>
 </head>
 <body>
@@ -52,17 +60,7 @@
             <div class="row h-100 w-100">
                 <div class="col-md-6 d-flex justify-content-center align-items-center" style="background-color: #131D4F;">
                     <div>
-                        <h1 class="text-white" id="welcome_text">Welcome to login</h1>
-                         @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-  
+                        <h1 class="text-white" id="welcome_text">Welcome to login</h1>  
                     </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-center justify-content-center">
@@ -80,7 +78,10 @@
                                                         </div>
                                                         <div class="form-group mt-3">
                                                                 <label class="form-label mb-0">Password</label>
-                                                                <input type="password" placeholder="Password" name="password" class="form-control typePassword"  required>
+                                                                <div class="position-relative">
+                                                                    <input type="password" id="login_password" placeholder="Password" name="password" class="form-control typePassword"  required>
+                                                                     <i class="ri-eye-line eye_elements" id="login_show_password"></i>
+                                                                </div>
                                                         </div>
                                                         <div class="d-flex justify-content-end mt-2 mb-2">
                                                             <a href="#" class="text-decoration-none text-muted" id="forget_password">Forgot your password? </a>
@@ -114,115 +115,100 @@
                                                     <h2 class="headings">Create your profile</h2>
                                                     <form id="register_user" action="{{ route('frontend.register') }}" method="POST">
                                                     @csrf    
-                                                    <div class="row">   
+                                                        <div class="row">   
                                                             <div class="col-md-6 mb-3">
                                                                  <div class="form-group">
                                                                     <label class="form-label mb-0">First Name<span class="text-danger">*</span></label>
-                                                                    <input type="text" name="first_name" placeholder="First Name" class="form-control typeText" maxlength="25" required>
-                                                                    @error('first_name')
-                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
-                                                                    @enderror
+                                                                    <input type="text" name="first_name" id="first_name" placeholder="First Name" class="form-control typeText" maxlength="25" required> 
                                                                 </div>
                                                             </div>
 
                                                              <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Last Name<span class="text-danger">*</span></label>
-                                                                    <input type="text" name="last_name" placeholder="Last Name" class="form-control typeText" maxlength="25" required>
-                                                                    @error('last_name')
-                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
-                                                                    @enderror
+                                                                    <input type="text" name="last_name" id="last_name" placeholder="Last Name" class="form-control typeText" maxlength="25" required> 
                                                                 </div>
                                                             </div>
                                                             
                                                             <div class="col-md-12 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Email id<span class="text-danger">*</span></label>
-                                                                    <input type="email" name="email" placeholder="Email" class="form-control" required>
-                                                                    @error('email')
-                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
-                                                                    @enderror
+                                                                    <input type="email" name="email" id="email"  placeholder="Email" class="form-control" required>
+                                                                   
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Mobile Number<span class="text-danger">*</span></label>
-                                                                    <input type="number" name="phone" placeholder="Mobile Number" class="form-control typeNumber" required>
-                                                                    @error('phone')
-                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
-                                                                    @enderror
+                                                                    <input type="number" name="phone" id="phone_number" placeholder="Mobile Number" class="form-control typeNumber" required> 
                                                                 </div>
+                                                                 <p class="text-danger"  id="mobile_number_error" style="font-size: 14px; display: none;"></p>
                                                             </div> 
 
                                                             <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Country <span class="text-danger">*</span></label>
-                                                                     <select class="form-control selects1" name="country" required>
-                                                                            <option>India</option>
-                                                                            <option>Out of India</option>
-                                                                     </select>
-                                                                     @error('country')
-                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
-                                                                    @enderror
+                                                                     <select class="form-control selects1" name="country" id="country" required> 
+                                                                            <option selected disabled class="text-mute">Select Country</option>
+                                                                            @if(count($countries) > 0)
+                                                                            @foreach ($countries as $country )
+                                                                                   <option value="{{ $country->name }}" data-id="{{ $country->id }}">{{ $country->name }}</option> 
+                                                                              @endforeach
+                                                                            @endif
+                                                                     </select> 
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Satate <span class="text-danger">*</span></label>
-                                                                     <select class="form-control selects1" name="state" required> 
-                                                                            <option>UP</option> 
-                                                                     </select>
-                                                                     @error('state')
-                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
-                                                                    @enderror
+                                                                     <select class="form-control selects1" name="state" id="state" required>  
+                                                                         <option selected disabled class="text-mute">select state</option>
+                                                                     </select> 
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">City<span class="text-danger">*</span></label>
-                                                                     <select class="form-control selects1" name="city" required>
+                                                                     <select class="form-control selects1" name="city" id="city" required>
                                                                             <option>Delhi</option>
                                                                             <option>Noida</option>
                                                                      </select>
-                                                                     @error('city')
-                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
-                                                                    @enderror
+                                                                      
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6 mb-3">
                                                                     <div class="form-group">
                                                                         <label class="form-label mb-0">Password<span class="text-danger">*</span></label>
-                                                                        <input type="password" name="password" placeholder="Password" class="form-control typePassword" required id="password">
-                                                                        @error('password')
-                                                                            <p style="color:red;"><b>{{ $message }}</b></p>
-                                                                        @enderror
+                                                                       <div class="position-relative">
+                                                                             <input type="password" name="password" placeholder="Password" class="form-control typePassword" required id="password"> 
+                                                                             <i class="ri-eye-line eye_elements" id="show_password"></i>
+                                                                       </div>
+                                                                       <p class="text-danger" id="password_limit" style="font-size: 14px; display: none;"></p>
                                                                     </div>
                                                             </div>
 
                                                             <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Confirm Password<span class="text-danger">*</span></label>
-                                                                    <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control typePassword" required id="confirm_password">
-                                                                    @error('password_confirmation')
-                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
-                                                                    @enderror
+                                                                    <div class="position-relative">
+                                                                        <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control typePassword" required id="confirm_password"> 
+                                                                         <i class="ri-eye-line eye_elements" id="show_confirm_password"></i> 
+                                                                    </div>
+                                                                     <p class="text-danger" id="password_error" style="font-size: 14px; display: none;"></p>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6 mb-3">
                                                                     <div class="form-group">
                                                                             <label class="form-label mb-0">Gender<span class="text-danger">*</span></label>
-                                                                            <select class="form-control selects1" name="gender" required>
+                                                                            <select class="form-control selects1" name="gender" id="gender" required>
                                                                                 <option>Male</option>
                                                                                 <option>Female</option>
-                                                                            </select>
-                                                                            @error('gender')
-                                                                                <p style="color:red;"><b>{{ $message }}</b></p>
-                                                                            @enderror
+                                                                            </select> 
                                                                     </div>
                                                             </div>
 
@@ -233,10 +219,7 @@
                                                                                 <option selected disabled>Select Aviation or Non Aviation</option>
                                                                                 <option value="aviation">Aviation</option>
                                                                                 <option value="non_aviation">Non Aviation</option>
-                                                                            </select>
-                                                                            @error('aviation_type')
-                                                                                <p style="color:red;"><b>{{ $message }}</b></p>
-                                                                            @enderror
+                                                                            </select> 
                                                                     </div>
                                                              </div>
 
@@ -255,10 +238,7 @@
                                                                                 <label class="form-check-label" for="fresher">
                                                                                     I'm a fresher
                                                                                 </label>
-                                                                            </div>
-                                                                            @error('experienced')
-                                                                                <p style="color:red;"><b>{{ $message }}</b></p>
-                                                                            @enderror
+                                                                            </div> 
                                                                     </div>
                                                             </div> 
                                                         </div> 
@@ -281,8 +261,8 @@
 
   <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ url('assets/frontend/script/script.js') }}"></script>
 
-<script src="script/script.js"> </script>
 
 <script>
 $(document).ready(function () {
@@ -312,13 +292,7 @@ $(document).ready(function () {
     })
 });
 
-</script>
-
-<script>
-      // register user form 
- 
-
-</script>
+</script> 
 
 </body>
 </html>
