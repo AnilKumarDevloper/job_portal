@@ -60,11 +60,15 @@
           <ul class="navbar-nav">
             <li class="nav-item dropdown profile-dropdown">
               <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <img src="{{ url('assets/backend/images/default_user.webp') }}" alt="user" width="30" class="profile-pic rounded-circle"  id="output"/>
+                aria-haspopup="true" aria-expanded="false"> 
+                  @if(Auth::user()->profile != '')
+                  <img src="{{ url('assets/upload/users').'/'.Auth::user()->profile }}" alt="user" width="30" class="profile-pic rounded-circle"  id="output"/>
+                  @else
+                    <img src="{{ url('assets/backend/images/default_user.webp') }}" alt="user" width="30" class="profile-pic rounded-circle"  id="output"/>
+                  @endif 
                 <div class="d-none d-md-flex">
                   <span class="ms-2">Hi,
-                    <span class="text-dark fw-bold">Deep</span></span>
+                    <span class="text-dark fw-bold">{{ Auth::user()->name ?? '' }}</span></span>
                   <span>
                     <i data-feather="chevron-down" class="feather-sm"></i>
                   </span>
@@ -82,11 +86,15 @@
                       </div>
                     </div>  
                     <div class="d-flex align-items-center mt-4  pt-3 pb-4  border-bottom">
+                    @if(Auth::user()->profile != '')
+                      <img src="{{ url('assets/upload/users').'/'.Auth::user()->profile }}" alt="user" width="90" class="rounded-circle" /> 
+                    @else 
                       <img src="{{ url('assets/backend/images/default_user.webp') }}" alt="user" width="90" class="rounded-circle" />
+                    @endif
                       <div class="ms-4">
-                        <h4 class="mb-0">Mr Deep</h4>
-                        <span class="text-muted">Administrator</span>
-                        <p class="text-muted mb-0 mt-1"><i data-feather="mail" class="feather-sm me-1"></i>demo@gmail.com</p>
+                        <h4 class="mb-0">{{ Auth::user()->name ?? '' }}</h4>
+                        <span class="text-muted">Super Admin</span>
+                        <p class="text-muted mb-0 mt-1"><i data-feather="mail" class="feather-sm me-1"></i>{{ Auth::user()->email ?? '' }}</p>
                       </div>
                     </div>
                   </li>
@@ -132,49 +140,49 @@
         <nav class="sidebar-nav">
           <ul id="sidebarnav"> 
             <li class="sidebar-item">
-              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false">
+              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.dashboard') }}" aria-expanded="false">
                 <i class="ri-dashboard-line"></i>
                 <span class="hide-menu">Dashboards</span>
               </a>
             </li>
 
               <li class="sidebar-item">
-                  <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages/employers.html" aria-expanded="false">
+                  <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.employers.index') }}" aria-expanded="false">
                     <i class="ri-group-line"></i> 
                     <span class="hide-menu">Employers</span>
                   </a>
               </li>
 
                <li class="sidebar-item">
-                  <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages/admins.html" aria-expanded="false">
+                  <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.admin.all_admins') }}" aria-expanded="false">
                     <i class="ri-user-settings-line"></i>
                     <span class="hide-menu">Admins</span>
                   </a>
               </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages/condidates.html" aria-expanded="false">
+                  <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.condidate_list') }}" aria-expanded="false">
                       <i class="ri-creative-commons-by-line"></i>
                       <span class="hide-menu">Condidates</span>
                   </a>
                 </li>
 
                  <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages/condidates.html" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.jobs.index') }}" aria-expanded="false">
                       <i class="ri-projector-line"></i>
                       <span class="hide-menu">Jobs</span>
                     </a>
                  </li>
 
                  <li class="sidebar-item">
-                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages/countries.html" aria-expanded="false">
+                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.countries.index') }}" aria-expanded="false">
                         <i class="ri-notification-2-line"></i> 
                         <span class="hide-menu">Countries</span>
                       </a>
                    </li>
 
                  <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages/condidates.html" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.general.index') }}" aria-expanded="false">
                       <i class="ri-layout-bottom-2-line"></i>
                       <span class="hide-menu">General</span>
                     </a>

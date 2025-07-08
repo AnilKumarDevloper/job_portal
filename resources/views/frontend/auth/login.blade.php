@@ -62,6 +62,10 @@
                                 </ul>
                             </div>
                         @endif
+                        
+                        <!-- Session Status -->
+                            <x-auth-session-status class="mb-4" :status="session('status')" />
+                      
   
                     </div>
                 </div>
@@ -95,14 +99,15 @@
                                              <!---- forget password start-->
                                                 <div class="login" id="forget_elements" style="display: none;">
                                                     <h2 class="headings">Forgot password</h2>
-                                                    <form>
+                                                    <form action="{{ route('password.email') }}" method="POST">
+                                                        @csrf
                                                         <div class="form-group">
                                                             <label class="form-label mb-0">Email id</label>
-                                                            <input type="email" placeholder="Email id" class="form-control"  required>
+                                                            <input type="email" placeholder="Email id" class="form-control"  name="email" value="{{ old('email') }}" required autofocus>
                                                         </div> 
                                                          
                                                         <div class="form-group d-flex justify-content-center mt-3 mb-3">
-                                                            <a  href="index.html" class=" sign_inButton w-75 text-center text-decoration-none" type="submit">Send OTP</a>
+                                                            <input class=" sign_inButton w-75 text-center text-decoration-none" type="submit" value="Email Password Reset Link">
                                                         </div>
                                                     </form>
                                                    <p class="text-center">Back to <a type="button" class="text-decoration-none gologin">Login &#8594;</a></p>

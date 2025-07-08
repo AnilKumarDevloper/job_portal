@@ -43,6 +43,7 @@
   <script src="{{ url('assets/backend/libs/dataTable/jquery.dataTables.min.js') }}"> </script>
 
   <script src="{{ url('assets/backend/css/myscript.js') }}"></script>
+  @yield('javascript-section')
 </body>
 
 </html>

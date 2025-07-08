@@ -57,7 +57,12 @@
                         <div class="candidate_element">
                             <button class="candidate_profile d-flex align-items-center gap-3" data-bs-toggle="offcanvas" data-bs-target="#profileSideBar" aria-controls="profileSideBar">
                                 <span><i class="ri-menu-3-line"></i></span>
-                                <img src="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fwww.gravatar.com%2Favatar%2F2c7d99fe281ecd3bcd65ab915bac6dd5%3Fs%3D250" class="candidate_img" alt="user img">
+
+                                @if(Auth::user()->profile != '')
+                                <img src="{{ url('assets/upload/users').'/'.Auth::user()->profile }}" class="candidate_img" alt="user img"> 
+                                @else
+                                <img src="{{ url('assets/default_user.webp') }}" class="candidate_img" alt="user img"> 
+                                @endif
                             </button>
                         </div>
                  </div>
@@ -75,11 +80,15 @@
                 <div class="offcanvas-body p-4">
                       <div class="sider_profile d-flex align-items-center"> 
                             <a href="">
-                                    <img class="user_profile" src="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fwww.gravatar.com%2Favatar%2F2c7d99fe281ecd3bcd65ab915bac6dd5%3Fs%3D250" alt="">
+                                @if(Auth::user()->profile != '')
+                                <img class="user_profile" src="{{ url('assets/upload/users').'/'.Auth::user()->profile }}" alt="">
+                                @else
+                                <img class="user_profile" src="{{ url('assets/default_user.webp') }}" alt="">
+                                @endif
                             </a>
                            
                             <div class="profile_edit">
-                                 <h2 class="candidateName mb-0">Deepak Sahani</h2>
+                                 <h2 class="candidateName mb-0">{{ Auth::user()->name ?? '' }}</h2>
                                  <p class=" designations_profile mb-1 p-0">Front End Developer</p>
                                  <a href="profile.html" class="profileEdit text-decoration-none">View & Update Profile</a>
                             </div>

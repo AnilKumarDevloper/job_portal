@@ -8,9 +8,13 @@
                              <div class="card sticky-top" style="top: 70px;">
                                  <div class="card-body">
                                         <div class="profile_image d-flex justify-content-center">
-                                             <img src="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fwww.gravatar.com%2Favatar%2F2c7d99fe281ecd3bcd65ab915bac6dd5%3Fs%3D250">
+                                            @if(Auth::user()->profile != '')
+                                                <img src="{{ url('assets/upload/users').'/'.Auth::user()->profile }}" class="candidate_img" alt="user img"> 
+                                            @else
+                                                <img src="{{ url('assets/default_user.webp') }}" class="candidate_img" alt="user img"> 
+                                            @endif
                                         </div>
-                                        <h3 class="text-center candidateName pt-3 pb-1 mb-0">Deepak Sahani</h3>
+                                        <h3 class="text-center candidateName pt-3 pb-1 mb-0">{{ Auth::user()->name ?? '' }}</h3>
                                         <p class="text-center designations m-0 p-0">Front End Developer</p>
                                         <p class="text-uppercase text-center pt-2 company mb-1">ddt software & ecommerce pvt ltd</p>
                                         <p class="online_day text-center">Last update 10d ago</p>
@@ -18,7 +22,7 @@
                                             <a class="view_profile" href="profile.html">View profile</a>
                                         </div>
                                         <div class="profile_proformance">
-                                            <h3 class="text-center candidateName pt-3 pb-1 mb-0">Deepak Sahani</h3>
+                                            <h3 class="text-center candidateName pt-3 pb-1 mb-0">{{ Auth::user()->name ?? '' }}</h3>
                                              <div class="card p-3">
                                                     <div class="row">
                                                         <div class="col-6" >

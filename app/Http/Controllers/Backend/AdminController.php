@@ -33,4 +33,28 @@ class AdminController extends Controller
             abort('500');
         }
     }
+
+    public function adminList(){
+        try{
+            return view('backend.admins.index');
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+    public function editAdmin(){
+        try{
+            return view('backend.admins.edit');
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+    public function createAdmin(){
+        try{
+            return view('backend.admins.create');
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+
+
 }

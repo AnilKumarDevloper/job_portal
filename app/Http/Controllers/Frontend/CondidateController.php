@@ -58,7 +58,7 @@ class CondidateController extends Controller
                 "gender" => $request->gender,
                 "field" => $request->aviation_type,
                 "is_experienced" => $request->experienced,
-                "user_role_id" => 3
+                "user_role_id" => 4
             ]);
             event(new Registered($user));
             Auth::login($user);
@@ -67,4 +67,21 @@ class CondidateController extends Controller
             abort('500');
         }
     }
+
+    public function condidateList(){
+        try{
+            return view('backend.condidates.index');
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+    public function condidateCreate(){
+        try{
+            return view('backend.condidates.create');
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+
+
 }

@@ -78,18 +78,14 @@
                     </a> 
                  </div>
            </div>
-
-
-          
         </div> 
       </div>
-  
-      <footer class="footer"></footer> 
-
-    </div>
-
-    <!--- page wrapper section end-->
  
+    </div>
+    <!--- page wrapper section end-->
   </div>
 
+  @section('javascript-section')
+
+  @endsection
 @endsection
