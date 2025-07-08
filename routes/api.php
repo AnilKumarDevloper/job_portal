@@ -26,3 +26,5 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/get-countries', [ApiController::class, 'getCountries'])->name('api.get_countries');
 Route::get('/get-states', [ApiController::class, 'getStates'])->name('api.get_states');
 Route::get('/get-cities', [ApiController::class, 'getCities'])->name('api.get_cities');
+Route::get('/check-existing-user-email', [ApiController::class, 'checkExistingUserEmail'])->name('api.check_existing_user_email');
+Route::get('/check-existing-user-phone', [ApiController::class, 'checkExistingUserPhone'])->name('api.check_existing_user_phone');

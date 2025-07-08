@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
-
+use Illuminate\Auth\Events\Registered;
 class CondidateController extends Controller
 {
     public function login(){
@@ -32,14 +32,21 @@ class CondidateController extends Controller
 
     public function registerCondidate(Request $request){
              $request->validate([
-            'firsst_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'phone' => ['required', 'digits:10'],
+            'country' => ['required'],
+            'state' => ['required'],
+            'city' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'gender' => ['required'],
+            'aviation_type' => ['required'],
+            'experienced' => ['required'],
         ]);
-
         try{
-            User::create([
+           $user = User::create([
+                "name" => $request->first_name .' '. $request->last_name,
                 "first_name" => $request->first_name,
                 "last_name" => $request->last_name,
                 "email" => $request->email,
@@ -49,12 +56,13 @@ class CondidateController extends Controller
                 "city" => $request->city,
                 "password" => Hash::make($request->password),
                 "gender" => $request->gender,
-                "field" => $request->field,
+                "field" => $request->aviation_type,
                 "is_experienced" => $request->experienced,
                 "user_role_id" => 3
             ]);
-
-            return redirect('/');
+            event(new Registered($user));
+            Auth::login($user);
+            return redirect()->route('frontend.home');
         }catch(\Exception $e){
             abort('500');
         }

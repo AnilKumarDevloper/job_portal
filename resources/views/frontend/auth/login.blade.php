@@ -53,7 +53,16 @@
                 <div class="col-md-6 d-flex justify-content-center align-items-center" style="background-color: #131D4F;">
                     <div>
                         <h1 class="text-white" id="welcome_text">Welcome to login</h1>
-                        
+                         @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+  
                     </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-center justify-content-center">
@@ -105,18 +114,24 @@
                                                     <h2 class="headings">Create your profile</h2>
                                                     <form id="register_user" action="{{ route('frontend.register') }}" method="POST">
                                                     @csrf    
-                                                    <div class="row">
+                                                    <div class="row">   
                                                             <div class="col-md-6 mb-3">
                                                                  <div class="form-group">
                                                                     <label class="form-label mb-0">First Name<span class="text-danger">*</span></label>
                                                                     <input type="text" name="first_name" placeholder="First Name" class="form-control typeText" maxlength="25" required>
+                                                                    @error('first_name')
+                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
 
                                                              <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Last Name<span class="text-danger">*</span></label>
-                                                                    <input type="text" name="first_name" placeholder="Last Name" class="form-control typeText" maxlength="25" required>
+                                                                    <input type="text" name="last_name" placeholder="Last Name" class="form-control typeText" maxlength="25" required>
+                                                                    @error('last_name')
+                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                             
@@ -124,6 +139,9 @@
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Email id<span class="text-danger">*</span></label>
                                                                     <input type="email" name="email" placeholder="Email" class="form-control" required>
+                                                                    @error('email')
+                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
 
@@ -131,70 +149,94 @@
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Mobile Number<span class="text-danger">*</span></label>
                                                                     <input type="number" name="phone" placeholder="Mobile Number" class="form-control typeNumber" required>
+                                                                    @error('phone')
+                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
+                                                                    @enderror
                                                                 </div>
                                                             </div> 
 
                                                             <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Country <span class="text-danger">*</span></label>
-                                                                     <select class="form-control selects1" required>
+                                                                     <select class="form-control selects1" name="country" required>
                                                                             <option>India</option>
                                                                             <option>Out of India</option>
                                                                      </select>
+                                                                     @error('country')
+                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Satate <span class="text-danger">*</span></label>
-                                                                     <select class="form-control selects1" required> 
+                                                                     <select class="form-control selects1" name="state" required> 
                                                                             <option>UP</option> 
                                                                      </select>
+                                                                     @error('state')
+                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">City<span class="text-danger">*</span></label>
-                                                                     <select class="form-control selects1" required>
+                                                                     <select class="form-control selects1" name="city" required>
                                                                             <option>Delhi</option>
                                                                             <option>Noida</option>
                                                                      </select>
+                                                                     @error('city')
+                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6 mb-3">
-                                                                     <div class="form-group">
-                                                                            <label class="form-label mb-0">Password<span class="text-danger">*</span></label>
-                                                                            <input type="password" placeholder="Password" class="form-control typePassword" required id="password">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label mb-0">Password<span class="text-danger">*</span></label>
+                                                                        <input type="password" name="password" placeholder="Password" class="form-control typePassword" required id="password">
+                                                                        @error('password')
+                                                                            <p style="color:red;"><b>{{ $message }}</b></p>
+                                                                        @enderror
                                                                     </div>
                                                             </div>
 
                                                             <div class="col-md-6 mb-3">
-                                                                    <div class="form-group">
-                                                                            <label class="form-label mb-0">Confirm Password<span class="text-danger">*</span></label>
-                                                                            <input type="password" placeholder="Confirm Password" class="form-control typePassword" required id="confirm_password">
-                                                                    </div>
+                                                                <div class="form-group">
+                                                                    <label class="form-label mb-0">Confirm Password<span class="text-danger">*</span></label>
+                                                                    <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control typePassword" required id="confirm_password">
+                                                                    @error('password_confirmation')
+                                                                        <p style="color:red;"><b>{{ $message }}</b></p>
+                                                                    @enderror
+                                                                </div>
                                                             </div>
 
                                                             <div class="col-md-6 mb-3">
                                                                     <div class="form-group">
                                                                             <label class="form-label mb-0">Gender<span class="text-danger">*</span></label>
-                                                                            <select class="form-control selects1" required>
+                                                                            <select class="form-control selects1" name="gender" required>
                                                                                 <option>Male</option>
                                                                                 <option>Female</option>
                                                                             </select>
+                                                                            @error('gender')
+                                                                                <p style="color:red;"><b>{{ $message }}</b></p>
+                                                                            @enderror
                                                                     </div>
                                                             </div>
 
                                                               <div class="col-md-6 mb-3">
                                                                     <div class="form-group">
                                                                             <label class="form-label mb-0">Aviation & Non Aviation<span class="text-danger">*</span></label>
-                                                                            <select class="form-control selects1" id="aviation_non_aviation" required>
+                                                                            <select class="form-control selects1" name="aviation_type" id="aviation_non_aviation" required>
                                                                                 <option selected disabled>Select Aviation or Non Aviation</option>
                                                                                 <option value="aviation">Aviation</option>
                                                                                 <option value="non_aviation">Non Aviation</option>
                                                                             </select>
+                                                                            @error('aviation_type')
+                                                                                <p style="color:red;"><b>{{ $message }}</b></p>
+                                                                            @enderror
                                                                     </div>
                                                              </div>
 
@@ -202,25 +244,27 @@
 
                                                                     <div class="d-flex gap-5">
                                                                             <div class="form-check">
-                                                                                <input class="form-check-input" type="radio" name="experienced" id="experienced" checked required>
+                                                                                <input class="form-check-input" value="1" type="radio" name="experienced" id="experienced" checked required>
                                                                                 <label class="form-check-label" for="experienced">
                                                                                     I'm experienced
                                                                                 </label>
                                                                             </div>
 
                                                                             <div class="form-check">
-                                                                                <input class="form-check-input" type="radio" name="experienced" id="fresher" required>
+                                                                                <input class="form-check-input" value="0" type="radio" name="experienced" id="fresher" required>
                                                                                 <label class="form-check-label" for="fresher">
                                                                                     I'm a fresher
                                                                                 </label>
                                                                             </div>
+                                                                            @error('experienced')
+                                                                                <p style="color:red;"><b>{{ $message }}</b></p>
+                                                                            @enderror
                                                                     </div>
                                                             </div> 
-
                                                         </div> 
                                                          
                                                         <div class="form-group d-flex justify-content-center mt-3 mb-3">
-                                                                <button class=" sign_inButton w-75 text-center text-decoration-none" type="submit">Register Now</button>
+                                                            <button class=" sign_inButton w-75 text-center text-decoration-none" type="submit">Register Now</button>
                                                         </div>
                                                     </form>
                                                     <p class="text-center">You have an account <a type="button" class="text-decoration-none gologin">Login &#8594;</a></p>
@@ -272,23 +316,7 @@ $(document).ready(function () {
 
 <script>
       // register user form 
-    $(document).ready(function () {  
-        $('#register_elements').on('submit', function (event) {  
-                event.preventDefault();
-            let aviation_non_aviation = $('#aviation_non_aviation').val();
-            if($('#password').val().trim() !== $('#confirm_password').val().trim()){
-                return;
-            }
-            if(aviation_non_aviation === "aviation"){ 
-                window.location.href = 'aviation_profile.html';
-            }else if(aviation_non_aviation === "non_aviation"){
-                 window.location.href = 'profile.html';
-            }else{
-                return;
-            } 
-
-        });
-     });
+ 
 
 </script>
 
