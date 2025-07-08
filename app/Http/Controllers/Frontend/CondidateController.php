@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Backend\Country;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +15,9 @@ class CondidateController extends Controller
 {
     public function login(){
         try{
-            return view('frontend.auth.login');
+            $countries =  Country::get();
+            return view('frontend.auth.login', compact('countries'));
+
         }catch(\Exception $e){
             abort('500');
         }
