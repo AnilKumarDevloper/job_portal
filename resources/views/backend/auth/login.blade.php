@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>login</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ url('assets/css/styles.css') }}">
   <!-- Favicon icon -->
   <link href="{{ url('assets/dist/css/style.min.css') }}" rel="stylesheet" />

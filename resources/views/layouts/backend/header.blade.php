@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dashboard</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ url('assets/backend/css/styles.css') }}">
   <!-- Favicon icon -->
   <link rel="icon" href="{{ url('assets/backend/images//icon/armylogo.PNG') }} " type="image/x-icon"> 
@@ -21,7 +22,7 @@
   @else 
       <script src="{{ asset('build/assets/app-3227c578.js') }}" defer></script>
   @endif
-  
+
 </head>
 <body>
   <div id="main-wrapper">
