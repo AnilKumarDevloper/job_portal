@@ -117,6 +117,14 @@ import { route } from 'ziggy-js';
             .then(response => response.json())
             .then(responseData =>{
                console.log(responseData, "responseData");
+                  $('#city').empty();  
+                     responseData.cities.forEach(cities => {  
+                        $('#city').append(`<option value="${cities.id}">${cities.name}</option>`);
+                     }); 
+
+
+               
+
             });
             
        });

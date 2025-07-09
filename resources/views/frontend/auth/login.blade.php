@@ -9,6 +9,8 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
      <link  href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"  rel="stylesheet"/>
      <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">   
+      <!--- select 2 css link-->
+  <link href="{{ url('assets/backend/libs/select2/select2.min.css') }} " rel="stylesheet">
         @routes
         @if (config('app.env') == 'local')
             @vite(['resources/js/app.js'])
@@ -52,6 +54,18 @@
             font-size: 14px;
             cursor: pointer;
         }
+        .select2-container .select2-selection--single{
+            height: 35px !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 33px !important;
+        }
+        .select2-container--default .select2-selection--single{
+            border: 1px solid #dee2e6 !important;
+        }
+        .select2-container--open .select2-dropdown--below{
+              border: 1px solid #dee2e6 !important;
+        }
    </style>
 </head>
 <body>
@@ -79,7 +93,7 @@
                                                         <div class="form-group mt-3">
                                                                 <label class="form-label mb-0">Password</label>
                                                                 <div class="position-relative">
-                                                                    <input type="password" id="login_password" placeholder="Password" name="password" class="form-control typePassword"  required>
+                                                                    <input type="password" id="login_password" placeholder="Password" name="password" class="form-control"  required>
                                                                      <i class="ri-eye-line eye_elements" id="login_show_password"></i>
                                                                 </div>
                                                         </div>
@@ -150,7 +164,7 @@
                                                             <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Country <span class="text-danger">*</span></label>
-                                                                     <select class="form-control selects1" name="country" id="country" required> 
+                                                                     <select class="form-control selects1 select2 form-control" name="country" id="country" required style="width: 100%;"> 
                                                                             <option selected disabled class="text-mute">Select Country</option>
                                                                             @if(count($countries) > 0)
                                                                             @foreach ($countries as $country )
@@ -164,28 +178,36 @@
                                                             <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Satate <span class="text-danger">*</span></label>
-                                                                     <select class="form-control selects1" name="state" id="state" required>  
-                                                                         <option selected disabled class="text-mute">select state</option>
+                                                                     <select class="form-control selects1 select2 form-control" name="state" id="state" required style="width: 100%;">  
+                                                                         <option selected disabled class="text-mute">Select State</option>
                                                                      </select> 
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-md-6 mb-3">
+                                                            <!-- <div class="col-md-6 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">City<span class="text-danger">*</span></label>
                                                                      <select class="form-control selects1" name="city" id="city" required>
                                                                             <option>Delhi</option>
                                                                             <option>Noida</option>
-                                                                     </select>
-                                                                      
+                                                                     </select> 
+                                                                </div>
+                                                            </div> -->
+
+                                                            <div class="col-md-6 mb-3">
+                                                                <div class="form-group select2form"> 
+                                                                    <label class="form-label mb-0"  >City</label> 
+                                                                    <select class="select2 form-control" style="width: 100%;" name="city" id="city" required> 
+                                                                         <option selected disabled class="text-mute">Select City</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6 mb-3">
                                                                     <div class="form-group">
-                                                                        <label class="form-label mb-0">Password<span class="text-danger">*</span></label>
+                                                                      <label class="form-label mb-0">Password<span class="text-danger">*</span></label>
                                                                        <div class="position-relative">
-                                                                             <input type="password" name="password" placeholder="Password" class="form-control typePassword" required id="password"> 
+                                                                             <input type="password" name="password" placeholder="Password" class="form-control" required id="password"> 
                                                                              <i class="ri-eye-line eye_elements" id="show_password"></i>
                                                                        </div>
                                                                        <p class="text-danger" id="password_limit" style="font-size: 14px; display: none;"></p>
@@ -196,7 +218,7 @@
                                                                 <div class="form-group">
                                                                     <label class="form-label mb-0">Confirm Password<span class="text-danger">*</span></label>
                                                                     <div class="position-relative">
-                                                                        <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control typePassword" required id="confirm_password"> 
+                                                                        <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control" required id="confirm_password"> 
                                                                          <i class="ri-eye-line eye_elements" id="show_confirm_password"></i> 
                                                                     </div>
                                                                      <p class="text-danger" id="password_error" style="font-size: 14px; display: none;"></p>
@@ -263,6 +285,10 @@
   <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{ url('assets/frontend/script/script.js') }}"></script>
+  <!--- select 2 link-->
+  <script src="{{ url('assets/backend/libs/select2/select2.full.min.js') }}"> </script>
+  <script src="{{ url('assets/backend/libs/select2/select2.min.js') }}"> </script>
+  <script src="{{ url('assets/backend/libs/select2/select2.init.js') }}"> </script>
 
 
 <script>

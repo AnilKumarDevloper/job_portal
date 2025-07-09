@@ -128,13 +128,10 @@
                       </div>
                     </div>
                     <!---forget form end-->
- 
-
                   </div>
               </div>
         </div>
-    </div>
-      
+    </div>      
 
    
   </section>
