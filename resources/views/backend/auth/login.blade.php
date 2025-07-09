@@ -7,9 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>login</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="stylesheet" href="{{ url('assets/css/styles.css') }}">
+  <link rel="stylesheet" href="{{ url('assets/backend/css/styles.css') }}">
+  <link rel="stylesheet" href="{{ url('assets/frontend/styles.css') }}">
   <!-- Favicon icon -->
-  <link href="{{ url('assets/dist/css/style.min.css') }}" rel="stylesheet" />
+  <link href="{{ url('assets/backend/dist/css/style.min.css') }}" rel="stylesheet" />
 
   <link
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
@@ -57,7 +58,7 @@
                               </div>
                             </div>
                             <div class="mb-4 logincontrol"> 
-                                <input class="form-control logininput typePassword" type="password" name="password" required placeholder="Password"> 
+                                <input class="form-control logininput " type="password" name="password" required placeholder="Password"> 
                             </div>
 
                             <div class="form-group"> 
@@ -69,8 +70,7 @@
                                 <div class="ms-auto">
                                   <p class="d-flex align-items-center link font-weight-medium forgetopen "><i class="ri-lock-line me-1 fs-4"></i> Forgot pwd?</p>
                                 </div>
-                              </div>
-
+                              </div> 
 
                             </div>
 
@@ -136,7 +136,8 @@
    
   </section>
 
-  <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="{{ url('assets/libs/jquery/dist/jquery.min.js') }}"></script>
+   
   <!-- <script src="{{ url('assets/backend/dist/') }}"></script> -->
   <script src="{{ url('assets/frontend/script/script.js') }}"></script>
 
