@@ -12,11 +12,8 @@
       <!--- select 2 css link-->
   <link href="{{ url('assets/backend/libs/select2/select2.min.css') }} " rel="stylesheet">
         @routes
-        @if (config('app.env') == 'local')
-            @vite(['resources/js/app.js'])
-        @else 
-            <script src="{{ asset('build/assets/app-3227c578.js') }}" defer></script>
-        @endif
+        @vite(['resources/js/app.js'])
+     
   <style>
       *{
         padding: 0px;

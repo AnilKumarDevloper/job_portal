@@ -174,12 +174,12 @@
                     </a>
                  </li>
 
-                 <li class="sidebar-item">
+                 <!-- <li class="sidebar-item">
                       <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.countries.index') }}" aria-expanded="false">
                         <i class="ri-notification-2-line"></i> 
                         <span class="hide-menu">Countries</span>
                       </a>
-                   </li>
+                   </li> -->
 
                  <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.general.index') }}" aria-expanded="false">

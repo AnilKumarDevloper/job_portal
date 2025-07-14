@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Backend\CondidateDetail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -33,7 +34,8 @@ class User extends Authenticatable
         'city',
         'gender',
         'field',
-        'is_experienced'
+        'is_experienced',
+        'created_by'
     ];
 
     /**
@@ -54,4 +56,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getCondidateDetail(){
+          return $this->hasOne(CondidateDetail::class, 'user_id');
+    }
+
+    public function getCreatedBy(){
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    public function getAmendedBy(){
+        return $this->belongsTo(User::class, 'amended_by');
+    }
 }

@@ -30,8 +30,9 @@ Route::middleware(['auth', 'admin'])->group(function(){
 
         Route::controller(CondidateController::class)->group(function(){
             Route::get('condidate-list', 'condidateList')->name('backend.condidate_list');
-            Route::get('condidate-edit', 'condidateEdit')->name('backend.condidate_edit');
+            Route::get('condidate-edit/{id}', 'condidateEdit')->name('backend.condidate_edit');
             Route::get('condidate-create', 'condidateCreate')->name('backend.condidate_create');
+            Route::POST('condidate-store', 'condidateStore')->name('backend.condidate_store');
         });
 
         Route::controller(JobController::class)->group(function(){

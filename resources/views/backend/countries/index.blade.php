@@ -42,19 +42,12 @@
       <div class="container-fluid pt-0">
            <div class="tab-content" id="pills-tabContent"> 
                     <div class="tab-pane fade show active" id="pills-candidates" role="tabpanel" aria-labelledby="pills-candidates-tab"> 
-                        <!-- <div class="row mb-4">  
-                              <div class="col-12 d-flex justify-content-end gap-3 flex-wrap">
-                                  <button 
-                                    class="btn btn-sm d-flex align-items-center justify-content-center m-0 w-100 addButton"
-                                      style="padding: 8px; max-width: 210px;"
-                                         data-bs-toggle="modal" data-bs-target="#country_code_add" >
-                                          <i class="ri-add-line me-1"></i>
-                                          <span> Add</span>
-                                  </button> 
-                              </div> 
-                         </div> -->
                           <div class="row">  
                               <div class="col-12">
+                                @php
+                                $sn = 1;
+                                @endphp
+                                @if(count($countries) > 0)
                                   <div class="card borderRadius">
                                       <div class="card-body p-0 table-responsive">
                                           <table class="table tableStyle mb-0 dataTable" id="zero_config_reported">
@@ -68,18 +61,17 @@
                                                   </tr>
                                               </thead>
                                               <tbody>
+                                                @foreach($countries as $country)
                                                   <tr>
-                                                      <td scope="row">1</td>
-                                                      <td class="">
-                                                         <p>Afghanistan</p>
-                                                      </td>  
+                                                      <td scope="row">{{ $sn++ }}</td>
+                                                      <td class=""><p>{{ $country->name }}</p></td>  
                                                       <td class="">
                                                              <div class="d-flex justify-content-center">
-                                                                <span class="badge font-weight-medium  bg-light-info text-info ">AF</span>
+                                                                <span class="badge font-weight-medium  bg-light-info text-info ">{{ $country->iso2 }}</span>
                                                              </div>
                                                       </td>
                                                        <td class="d-flex justify-content-center"> 
-                                                            <span class="badge font-weight-medium  bg-light-primary text-primary border-0">93</span>
+                                                            <span class="badge font-weight-medium  bg-light-primary text-primary border-0">{{ $country->phonecode }}</span>
                                                         </td>
                                                       <td>
                                                           <div class="button--group d-flex justify-content-end">
@@ -92,11 +84,16 @@
                                                           </div>
                                                       </td>
                                                   </tr>   
+                                                  @endforeach
                                               </tbody>
                                           </table>
+                                        </div>
                                       </div>
-                                  </div>
-                              </div>
+                                      {{ $countries->links('pagination::bootstrap-5') }}
+                                  @else
+                                    <center>No Record Available</center>
+                                  @endif
+                              </div>      
                           </div> 
                     </div>
                     <div class="tab-pane fade" id="pills-degree" role="tabpanel" aria-labelledby="pills-degree-tab">
@@ -113,6 +110,10 @@
                          </div>
                           <div class="row">  
                               <div class="col-12">
+                                @php
+                                $sns = 1;
+                                @endphp
+                                @if(count($states) > 0)
                                   <div class="card borderRadius">
                                       <div class="card-body p-0 table-responsive">
                                           <table class="table tableStyle mb-0 dataTable" id="zero_config_reported">
@@ -125,13 +126,14 @@
                                                   </tr>
                                               </thead>
                                               <tbody>
+                                                @foreach($states as $state)
                                                   <tr>
-                                                      <td scope="row">1</td>
+                                                      <td scope="row">{{ $sns++ }}</td>
                                                       <td class="">
-                                                         <p class="mb-0">UP</p>
+                                                         <p class="mb-0">{{ $state->name }}</p>
                                                       </td>  
                                                       <td class="text-center">
-                                                                India
+                                                                {{ $state->getCountry->name }}
                                                       </td>
                                                       <td>
                                                           <div class="button--group d-flex justify-content-end">
@@ -144,10 +146,15 @@
                                                           </div>
                                                       </td>
                                                   </tr>  
+                                                  @endforeach
                                               </tbody>
                                           </table>
                                       </div>
                                   </div>
+                                      {{ $states->links('pagination::bootstrap-5') }}
+                                  @else
+                                  
+                                  @endif
                               </div>
                           </div>
                     </div>
@@ -165,9 +172,12 @@
                             </div>
                             <div class="row">  
                                 <div class="col-12">
+                                  @php
+                                  $snc = 1;
+                                  @endphp
                                     <div class="card borderRadius">
                                         <div class="card-body p-0 table-responsive">
-                                            
+                                            @if(count($cities) > 0)
                                             <table class="table tableStyle mb-0 dataTable" id="zero_config_reported">
                                                 <thead>
                                                     <tr>
@@ -179,10 +189,11 @@
                                                 </thead>
 
                                                 <tbody>
+                                                  @foreach($cities as $city)
                                                     <tr>
-                                                        <td scope="row">1</td>
+                                                        <td scope="row">{{ $snc++ }}</td>
                                                         <td class="">
-                                                            <p class="mb-0">Noida</p>
+                                                            <p class="mb-0">{{ $city->name }}</p>
                                                         </td>  
 
                                                         <td class="text-center">
@@ -200,10 +211,15 @@
                                                             </div>
                                                         </td>
                                                     </tr>   
-                                                        
+                                                        @endforeach
 
                                                 </tbody>
                                             </table>
+                                      {{ $cities->links('pagination::bootstrap-5') }}
+
+                                            @else
+
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

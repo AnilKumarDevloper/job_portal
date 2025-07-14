@@ -1,11 +1,6 @@
 
   </div>
-
-  <!-- customizer Panel -->
-
-  <!-- ============================================================== -->
-  <!-- All Jquery -->
-  <!-- ============================================================== -->
+  
   <script src="{{ url('assets/backend/libs/jquery/dist/jquery.min.js') }}"></script>
   <!-- Bootstrap tether Core JavaScript -->
   <script src="{{ url('assets/backend/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
@@ -34,15 +29,12 @@
   <script src="{{ url('assets/backend/libs/select2/select2.full.min.js') }}"> </script>
   <script src="{{ url('assets/backend/libs/select2/select2.min.js') }}"> </script>
   <script src="{{ url('assets/backend/libs/select2/select2.init.js') }}"> </script>
-
-  <!--- data tables cdn-->
   <!--- data tables cdn-->
   <script src="{{ url('assets/backend/libs/dataTable/datatable-basic.init.js') }}"> </script>
   <script src="{{ url('assets/backend/libs/dataTable/dataTables.responsive.min.js') }}"> </script>
   <script src="{{ url('assets/backend/libs/dataTable/jquery.dataTables.min.js') }}"> </script>
-
   <script src="{{ url('assets/backend/css/myscript.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   @yield('javascript-section')
 </body>
-
 </html>
