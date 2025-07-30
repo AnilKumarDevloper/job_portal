@@ -30,4 +30,9 @@ class Country extends Model
         "flag",
         "wikiDataId",
     ];
+
+    public function states()
+    {
+        return $this->hasMany(State::class);
+    }
 }

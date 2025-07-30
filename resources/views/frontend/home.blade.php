@@ -19,7 +19,7 @@
                                         <p class="text-uppercase text-center pt-2 company mb-1">ddt software & ecommerce pvt ltd</p>
                                         <p class="online_day text-center">Last update 10d ago</p>
                                         <div class="d-flex justify-content-center ">
-                                            <a class="view_profile" href="profile.html">View profile</a>
+                                            <a class="view_profile" href="{{ route('frontend.user-profile') }}">View profile</a>
                                         </div>
                                         <div class="profile_proformance">
                                             <h3 class="text-center candidateName pt-3 pb-1 mb-0">{{ Auth::user()->name ?? '' }}</h3>
@@ -61,7 +61,7 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <h3 class="headings">Recommended Jobs for you</h3>
-                                            <a href="jobs.html" class="linktext">View all</a>
+                                            <a href="{{ route('jobs') }}" class="linktext">View all</a>
                                         </div>
                                         <div class="tabs_job">
                                                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"> 
@@ -86,7 +86,7 @@
                                                               <div class="slicky_elements">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <a href="applyJob.html" class="text-decoration-none text-black">
+                                                                            <a href="{{ route('frontend.apply-jobs') }}" class="text-decoration-none text-black">
                                                                                  <div class="companys d-flex justify-content-between">
                                                                                     <img class="campany_logo" src="logoipsums.png"> 
                                                                                     <p class="online_day text-end">10d ago</p> 
@@ -105,7 +105,7 @@
                                                                <div class="slicky_elements">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <a href="applyJob.html" class="text-decoration-none text-black">
+                                                                            <a href="{{ route('frontend.apply-jobs') }}" class="text-decoration-none text-black">
                                                                                  <div class="companys d-flex justify-content-between">
                                                                                     <img class="campany_logo" src="logoipsums.png"> 
                                                                                     <p class="online_day text-end">10d ago</p> 
@@ -124,7 +124,7 @@
                                                               <div class="slicky_elements">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <a href="applyJob.html" class="text-decoration-none text-black">
+                                                                            <a href="{{ route('frontend.apply-jobs') }}" class="text-decoration-none text-black">
                                                                                  <div class="companys d-flex justify-content-between">
                                                                                     <img class="campany_logo" src="logoipsums.png"> 
                                                                                     <p class="online_day text-end">10d ago</p> 
@@ -143,7 +143,7 @@
                                                                <div class="slicky_elements">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <a href="applyJob.html" class="text-decoration-none text-black">
+                                                                            <a href="{{ route('frontend.apply-jobs') }}" class="text-decoration-none text-black">
                                                                                  <div class="companys d-flex justify-content-between">
                                                                                     <img class="campany_logo" src="logoipsums.png"> 
                                                                                     <p class="online_day text-end">10d ago</p> 
@@ -169,7 +169,7 @@
                                                             <div class="slicky_elements">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <a href="applyJob.html" class="text-decoration-none text-black">
+                                                                            <a href="{{ route('frontend.apply-jobs') }}" class="text-decoration-none text-black">
                                                                                  <div class="companys d-flex justify-content-between">
                                                                                     <img class="campany_logo" src="logoipsums.png"> 
                                                                                     <p class="online_day text-end">10d ago</p> 
@@ -196,13 +196,13 @@
                                 <div class="card mt-3">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-end">
-                                            <a href="jobs.html" class="linktext">View all</a>
+                                            <a href="{{ route('jobs') }}" class="linktext">View all</a>
                                         </div>
                                         <div class="view_all_job"> 
                                                <div class="slicky_elements">
                                                     <div class="card">
                                                         <div class="card-body"> 
-                                                            <a href="applyJob.html" class="text-decoration-none text-black">
+                                                            <a href="{{ route('frontend.apply-jobs') }}" class="text-decoration-none text-black">
                                                                     <div class="companys d-flex justify-content-between">
                                                                     <img class="campany_logo" src="logoipsums.png"> 
                                                                     <p class="online_day text-end">10d ago</p> 
@@ -222,7 +222,7 @@
                                                <div class="slicky_elements">
                                                     <div class="card">
                                                         <div class="card-body"> 
-                                                            <a href="applyJob.html" class="text-decoration-none text-black">
+                                                            <a href="{{ route('frontend.apply-jobs') }}" class="text-decoration-none text-black">
                                                                     <div class="companys d-flex justify-content-between">
                                                                     <img class="campany_logo" src="logoipsums.png"> 
                                                                     <p class="online_day text-end">10d ago</p> 
@@ -247,20 +247,16 @@
                                             <!----->
                                             <div class="card mb-2">
                                                 <div class="card-body">
-                                                    <a href="applyJob.html" class="text-decoration-none text-black">
-                                                            
+                                                    <a href="{{ route('frontend.apply-jobs') }}" class="text-decoration-none text-black">
                                                         <div class="d-flex justify-content-between">
                                                             <div class="details_container">
                                                                     <h3 class="sub_headings mt-3">Professional &amp; Managed Service Offering Manager</h3>
-
                                                                         <div class="d-flex align-content-center flex-wrap gap-2">
                                                                         <span class="company_nams">WNS Holding...</span>
                                                                         <span class="company_reviews"><i class="ri-star-fill"></i> 4.5</span>
                                                                         <span class="reviews_">607 Reviews</span>
                                                                     </div> 
-
                                                                         <div class="experience_locations d-flex mt-2">
-
                                                                             <span class="exp_ sets d-flex gap-2">
                                                                                 <i class="ri-shopping-bag-line"></i>
                                                                                 <span>10-20 Yrs</span>
@@ -270,9 +266,7 @@
                                                                                 <i class="ri-map-pin-2-line"></i>
                                                                                 <span>Delhi/NCR</span>
                                                                             </span>
-
                                                                         </div>
-
                                                                         <div class="degree mt-2"> 
                                                                             <p class="text-capitalize text-muted mb-0">
                                                                                 <i class="ri-book-2-line"></i>
@@ -294,20 +288,16 @@
 
                                             <div class="card mb-2">
                                                 <div class="card-body">
-                                                    <a href="applyJob.html" class="text-decoration-none text-black">
-                                                            
+                                                    <a href="{{ route('frontend.apply-jobs') }}" class="text-decoration-none text-black">
                                                         <div class="d-flex justify-content-between">
                                                             <div class="details_container">
                                                                     <h3 class="sub_headings mt-3">Professional &amp; Managed Service Offering Manager</h3>
-
                                                                         <div class="d-flex align-content-center flex-wrap gap-2">
                                                                         <span class="company_nams">WNS Holding...</span>
                                                                         <span class="company_reviews"><i class="ri-star-fill"></i> 4.5</span>
                                                                         <span class="reviews_">607 Reviews</span>
                                                                     </div> 
-
                                                                         <div class="experience_locations d-flex mt-2">
-
                                                                             <span class="exp_ sets d-flex gap-2">
                                                                                 <i class="ri-shopping-bag-line"></i>
                                                                                 <span>10-20 Yrs</span>
@@ -317,9 +307,7 @@
                                                                                 <i class="ri-map-pin-2-line"></i>
                                                                                 <span>Delhi/NCR</span>
                                                                             </span>
-
                                                                         </div>
-
                                                                         <div class="degree mt-2"> 
                                                                             <p class="text-capitalize text-muted mb-0">
                                                                                 <i class="ri-book-2-line"></i>
@@ -328,7 +316,6 @@
                                                                             <p class="text-capitalize text-muted">Infrastructure management Service</p>
                                                                         </div>
                                                                         <p class="online_day">10d ago</p> 
-                                                                        
                                                             </div> 
                                                                 <span>
                                                                 <img class="campany_logo" src="logoipsums.png"> 
@@ -341,7 +328,7 @@
 
                                             <div class="card mb-2">
                                                 <div class="card-body">
-                                                    <a href="applyJob.html" class="text-decoration-none text-black">
+                                                    <a href="{{ route('frontend.apply-jobs') }}" class="text-decoration-none text-black">
                                                             
                                                         <div class="d-flex justify-content-between">
                                                             <div class="details_container">

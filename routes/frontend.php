@@ -5,6 +5,11 @@ use App\Http\Controllers\Frontend\CondidateController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/get-states/{country_id}', [CondidateController::class, 'getStates'])->name('get.states');
+Route::get('/get-cities/{state_id}', [CondidateController::class, 'getCities'])->name('get.cities');
+
+
 Route::middleware('guest')->group(function () {
     Route::get('login', [CondidateController::class, 'login'])->name('frontend.login');
     Route::post('login', [CondidateController::class, 'loginStore'])->name('frontend.login_store');
@@ -13,6 +18,9 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'home'])->name('frontend.home');
+    Route::get('/profile', [HomeController::class, 'userprofile'])->name('frontend.user-profile');
+    Route::get('/jobs', [HomeController::class, 'jobsDashboard'])->name('jobs');
+    Route::get('/apply-jobs', [HomeController::class, 'applyJobs'])->name('frontend.apply-jobs');
 });
 
 

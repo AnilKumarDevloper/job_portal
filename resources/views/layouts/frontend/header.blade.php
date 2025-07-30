@@ -9,6 +9,7 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
      <link  href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"  rel="stylesheet"/>
 
+    <link rel="stylesheet" href="{{ asset('assets/frontend/select2/select2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
         @routes
@@ -23,7 +24,7 @@
 <header class="condidate_header  bg-white sticky-top">
     <nav class="">
         <div class="container d-flex align-items-center">
-            <a class="navbar-brand company_logo" href="index.html" >
+            <a class="navbar-brand company_logo" href="{{ route('frontend.home') }}" >
                   <img src="{{ url('assets/frontend/bolt-heights-new.jpg') }}" style="max-width: 180px;">
             </a>
 
@@ -31,7 +32,7 @@
                  <div class="navmenu d-flex gap-5 align-items-center">
                      <ul class="job_list">
                         <li>
-                            <a href="jobs.html">Jobs</a>
+                            <a href="{{ route('jobs') }}">Jobs</a>
                             <span class="nottifications bg-danger"><span class="d-flex justify-content-center align-items-center">5</span>
                         </li> 
                      </ul>
@@ -90,7 +91,7 @@
                             <div class="profile_edit">
                                  <h2 class="candidateName mb-0">{{ Auth::user()->name ?? '' }}</h2>
                                  <p class=" designations_profile mb-1 p-0">Front End Developer</p>
-                                 <a href="profile.html" class="profileEdit text-decoration-none">View & Update Profile</a>
+                                 <a href="{{ route('frontend.user-profile') }}" class="profileEdit text-decoration-none">View & Update Profile</a>
                             </div>
                       </div>
                       <hr>
@@ -123,7 +124,7 @@
                      <div class="mt-3">
                         <ul class="list-unstyled">
                             <li class="profile_list">
-                                <a href="profile.html" class="d-flex gap-3 text-decoration-none text-dark">
+                                <a href="{{ route('frontend.user-profile') }}" class="d-flex gap-3 text-decoration-none text-dark">
                                     <i class="ri-settings-2-line"></i>
                                     <span>Settings</span>
                                 </a>

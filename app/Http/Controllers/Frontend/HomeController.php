@@ -7,13 +7,25 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function home(){
-        try{
+    public function home()
+    {
+        try {
             return view('frontend.home');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             abort('500');
         }
     }
 
-    
+    public function userprofile()
+    {
+        return view('frontend.user_profile');
+    }
+
+    public function jobsdashboard() {
+        return view('frontend.jobs');
+    }
+
+    public function applyJobs(){
+        return view('frontend.apply_jobs');
+    }
 }

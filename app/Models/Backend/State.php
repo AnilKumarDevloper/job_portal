@@ -21,7 +21,13 @@ class State extends Model
         "wikiDataId",
     ];
 
-    public function getCountry(){
+    public function getCountry()
+    {
         return $this->belongsTo(Country::class, 'country_id');
+    }
+
+    public function cities()
+    {
+        return $this->hasMany(City::class);
     }
 }

@@ -279,7 +279,7 @@
                                         </div> 
                                         <div class="col-md-6 mb-4">
                                            <div class="form-group"> 
-                                               <label class="text-dark" for="title">Facebook URL<span class="text-danger"> *</span></label>
+                                               <label class="text-dark" for="title">Facebook URL</label>
                                                <div class="input-group">
                                                    <span class="input-grouptext"><i class="ri-facebook-line"></i></span>
                                                    <input class="form-control" name="facebook_url" placeholder="https://www.facebook.com/" type="text" value="{{ old('facbook') }}">
@@ -291,7 +291,7 @@
                                         </div>
                                         <div class="col-md-6 mb-4">
                                             <div class="form-group"> 
-                                                <label class="text-dark" for="title">Linkedin URL<span class="text-danger"> *</span></label>
+                                                <label class="text-dark" for="title">Linkedin URL</label>
                                                 <div class="input-group">
                                                     <span class="input-grouptext"><i class="ri-linkedin-line"></i></span>
                                                     <input class="form-control" name="linkedin_url" placeholder="https://in.linkedin.com/" type="text" value="{{ old('linkedin_url') }}">  

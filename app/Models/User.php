@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
+    use SoftDeletes;
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -38,6 +40,8 @@ class User extends Authenticatable
         'created_by'
     ];
 
+    protected $dates = ['deleted_at'];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -57,14 +61,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getCondidateDetail(){
-          return $this->hasOne(CondidateDetail::class, 'user_id');
+    public function getCondidateDetail()
+    {
+        return $this->hasOne(CondidateDetail::class, 'user_id');
     }
 
-    public function getCreatedBy(){
+    public function getCreatedBy()
+    {
         return $this->belongsTo(User::class, 'created_by');
     }
-    public function getAmendedBy(){
+    public function getAmendedBy()
+    {
         return $this->belongsTo(User::class, 'amended_by');
     }
 }
