@@ -21,6 +21,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [HomeController::class, 'userprofile'])->name('frontend.user-profile');
     Route::get('/jobs', [HomeController::class, 'jobsDashboard'])->name('jobs');
     Route::get('/apply-jobs', [HomeController::class, 'applyJobs'])->name('frontend.apply-jobs');
+    Route::get('/aviation',[HomeController::class,'nonAviation'])->name('frontend.aviation');
+    Route::post('/update-personal-details', [HomeController::class, 'updatePersonalDetails'])->name('frontend.update-personal-details');
+    Route::post('/update-skills', [HomeController::class, 'updateSkill'])->name('frontend.update-skills');
+    Route::post('/update-employment', [HomeController::class, 'updateEmployement'])->name('frontend.add-employment');
+    Route::post('/update-it-skills',[HomeController::class,'updateitSkills'])->name('frontend.add-itskill');
+    Route::post('/add-profile-summary',[HomeController::class,'updateprofileSummary'])->name('frontend.add-profile-summary');
+
+    // Routes for Education
+    Route::post('/add-education-details', [HomeController::class, 'addEducationDetails'])->name('frontend.add-education-details');
+    // Route::post('/update-education-details/{id}', [HomeController::class, 'updateEducationDetails'])->name('frontend.update-education-details');
+    // Route::get('/get-education-details/{id}', [HomeController::class, 'getEducationDetails'])->name('frontend.get-education-details');
 });
+
 
 

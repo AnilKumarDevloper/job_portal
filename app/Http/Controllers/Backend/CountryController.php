@@ -21,4 +21,5 @@ class CountryController extends Controller
             abort('500');
         }
     }
+
 }

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class CondidateDetail extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         "user_id",
         "father_name",
@@ -21,6 +21,7 @@ class CondidateDetail extends Model
         "nationality",
         "national_id_card",
         "experience",
+        "experience_month",
         "career_level",
         "functional_area",
         "current_salary",
@@ -33,6 +34,14 @@ class CondidateDetail extends Model
         "address",
         "field",
         "is_experienced",
+        "is_current_employment",
+        "employment_type",
+        "company_name",
+        "job_title",
+        "joining_date",
+        "notice_period",
+        "job_profile",
+        "profile_summary"
     ];
 
     public $casts = [
@@ -41,7 +50,8 @@ class CondidateDetail extends Model
 
     ];
 
-    public function getUser(){
-        return $this->hasMany(User::class, 'user_id');
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

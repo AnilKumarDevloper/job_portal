@@ -4,7 +4,7 @@
 
     <!--- page wrapper section starts-->
     <div class="page-wrapper">
-    
+
       <div class="page-titles">
         <div class="row">
           <div class="col-lg-8 col-md-6 col-12 align-self-center">
@@ -16,18 +16,18 @@
                 d-none d-md-flex
                 align-items-center
                 justify-content-end
-              "> 
-            
+              ">
+
           </div>
         </div>
-      </div> 
+      </div>
 
       <div class="container-fluid">
         <!-- row -->
-        <div class="row"> 
+        <div class="row">
            <div class="col-md-4 col-sm-6 col-12">
                 <div class="card">
-                    <a href="pages/condidates.html">
+                    <a href="{{ route('backend.condidate_list') }}">
                          <div class="card-body d-flex  justify-content-between align-items-center">
                               <span class="btn btn-xl btnlights btn-circle d-flex align-items-center justify-content-center">
                                 <i class="ri-group-line"></i>
@@ -39,13 +39,13 @@
                                     </span>
                                 </div>
                           </div>
-                    </a> 
+                    </a>
                  </div>
            </div>
 
            <div class="col-md-4 col-sm-6 col-12">
                 <div class="card">
-                    <a href="pages/employers.html">
+                    <a href="{{ route('backend.employers.index') }}">
                          <div class="card-body d-flex  justify-content-between align-items-center">
                               <span class="btn btn-xl btnlights btn-circle d-flex align-items-center justify-content-center">
                                <i class="ri-user-6-line"></i>
@@ -57,13 +57,13 @@
                                     </span>
                                 </div>
                           </div>
-                    </a> 
+                    </a>
                  </div>
            </div>
 
             <div class="col-md-4 col-sm-6 col-12">
                 <div class="card">
-                    <a href="pages/jobs.html">
+                    <a href="{{ route('backend.jobs.index') }}">
                          <div class="card-body d-flex  justify-content-between align-items-center">
                               <span class="btn btn-xl btnlights btn-circle d-flex align-items-center justify-content-center">
                                   <i class="ri-shape-line"></i>
@@ -75,12 +75,12 @@
                                     </span>
                                 </div>
                           </div>
-                    </a> 
+                    </a>
                  </div>
            </div>
-        </div> 
+        </div>
       </div>
- 
+
     </div>
     <!--- page wrapper section end-->
   </div>

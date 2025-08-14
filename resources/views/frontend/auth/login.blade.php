@@ -107,7 +107,8 @@
                                         <div class="position-relative">
                                             <input type="password" id="login_password" placeholder="Password"
                                                 name="password" class="form-control" required>
-                                            <i class="ri-eye-line eye_elements" id="login_show_password"></i>
+                                            <i class="ri-eye-line eye_elements toggle-password"
+                                                data-target="login_password" id="login_show_password"></i>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-end mt-2 mb-2">
@@ -196,19 +197,6 @@
                                             <div class="form-group">
                                                 <label class="form-label mb-0">Country <span
                                                         class="text-danger">*</span></label>
-                                                {{-- <select class="form-control selects1 select2"
-                                                    name="country" id="country" required style="width: 100%;">
-                                                    <option selected disabled class="text-mute">Select Country</option>
-                                                    @if (count($countries) > 0)
-                                                        @foreach ($countries as $country)
-                                                            <option value="{{ $country->name }}"
-                                                                data-id="{{ $country->id }}">{{ $country->name }}
-                                                            </option>
-
-                                                            <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select> --}}
                                                 <select class="form-control selects1 select2" name="country"
                                                     id="country" required style="width: 100%;">
                                                     <option selected disabled>Select Country</option>
@@ -229,9 +217,6 @@
                                                     <option selected disabled class="text-muted">Select State</option>
                                                     @if (!empty($states) && count($states) > 0)
                                                         @foreach ($states as $state)
-                                                            {{-- <option value="{{ $state->name }}"
-                                                                data-id="{{ $state->id }}">{{ $state->name }}
-                                                            </option> --}}
                                                             <option value="{{ $state->id }}">{{ $state->name }}
                                                             </option>
                                                         @endforeach
@@ -249,10 +234,6 @@
                                                     <option selected class="text-muted">Select City</option>
                                                     @if (!empty($cities))
                                                         @foreach ($cities as $city)
-                                                            {{-- <option value="{{ $city->name }}"
-                                                                data-id="{{ $city->id }}">
-                                                                {{ $city->name }}
-                                                            </option> --}}
                                                             <option value="{{ $city->id }}">{{ $city->name }}
                                                             </option>
                                                         @endforeach
@@ -267,10 +248,10 @@
                                                         class="text-danger">*</span></label>
                                                 <div class="position-relative">
                                                     <input type="password" name="password" placeholder="Password"
-                                                        class="form-control" required id="password">
-                                                    <i class="ri-eye-line eye_elements" id="show_password"></i>
+                                                        class="form-control" required id="first_password">
+                                                    <i class="ri-eye-line eye_elements toggle-password" data-target="first_password" id="password"></i>
                                                 </div>
-                                                <p class="text-danger" id="password_limit"
+                                                <p class="text-danger" id="password" id="password_limit"
                                                     style="font-size: 14px; display: none;"></p>
                                             </div>
                                         </div>
@@ -283,8 +264,8 @@
                                                     <input type="password" name="password_confirmation"
                                                         placeholder="Confirm Password" class="form-control" required
                                                         id="confirm_password">
-                                                    <i class="ri-eye-line eye_elements"
-                                                        id="show_confirm_password"></i>
+                                                    <i class="ri-eye-line eye_elements toggle-password"
+                                                        id="show_confirm_password" data-target="confirm_password"></i>
                                                 </div>
                                                 <p class="text-danger" id="password_error"
                                                     style="font-size: 14px; display: none;"></p>
@@ -396,6 +377,18 @@
 
     <script>
         $(document).ready(function() {
+
+            document.querySelectorAll('.toggle-password').forEach(icon => {
+                icon.addEventListener('click', function() {
+                    const targetInput = document.getElementById(this.getAttribute('data-target'));
+                    const type = targetInput.getAttribute('type') === 'password' ? 'text' :
+                        'password';
+                    targetInput.setAttribute('type', type);
+                    this.classList.toggle('ri-eye-line');
+                    this.classList.toggle('ri-eye-off-line');
+                });
+            });
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

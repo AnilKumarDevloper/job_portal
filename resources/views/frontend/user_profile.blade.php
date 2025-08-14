@@ -20,46 +20,61 @@
                         </div>
                         <div class="col-md-9">
                             <div class="profile_detaols2">
-                                <div class="userName2 d-flex gap-2">
-                                    <span>
-                                        <h1 class="m-0 text-center">Deepak Sahani</h1>
-                                        <p class="text-muted">Profile last updated <span class="text-dark"> -
-                                                Yesterday</span></p>
-                                    </span>
-                                    <span>
-                                        <button class="bg-transparent" style="border: 0px;" data-bs-toggle="modal"
-                                            data-bs-target="#profile_edit"> <i class="ri-pencil-line"></i></button>
-                                    </span>
+                                <div class="userName2 d-flex align-items-center gap-3">
+                                    <div class="flex-grow-1">
+                                        <h1 class="m-0 text-start">{{ Auth::user()->name ?? '' }}</h1>
+                                        <p class="text-muted mb-0">Profile last updated: <span
+                                                class="text-dark">{{ $lastUpdatedHuman }}</span></p>
+                                    </div>
+                                    <div>
+                                        <button class="bg-transparent border-0" data-bs-toggle="modal"
+                                            data-bs-target="#profile_edit">
+                                            <i class="ri-pencil-line fs-5"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <hr class="hr" style="width: 40%;">
                                 <div class="d-flex gap-3">
                                     <div class="d-flex flex-column gap-3 border2">
+
                                         <span class="d-felx gap-3 text-muted textmuteds">
                                             <i class="ri-map-pin-line"></i>
-                                            <span class="">New Delhi, INDIA</span>
+                                            {{ optional($cities->firstWhere('id', $user->city))->name ?? 'City' }},
+                                            {{ optional($states->firstWhere('id', $user->state))->name ?? 'State' }},
+                                            {{ optional($countries->firstWhere('id', $user->country))->name ?? 'Country' }}
                                         </span>
 
-                                        <span class="d-felx gap-3 text-muted textmuteds">
+                                        <span class="d-flex gap-1 text-muted">
                                             <i class="ri-briefcase-line"></i>
-                                            <span class="">2.5 year experience</span>
+                                            @if ($candidate->is_experienced == '1')
+                                                <span>Experienced</span>
+                                            @elseif ($candidate->is_experienced == '0')
+                                                <span>Inexperienced</span>
+                                            @endif
                                         </span>
-
-                                        <span class="d-felx gap-3 text-muted textmuteds">
-                                            <i class="ri-shopping-bag-line"></i>
-                                            <span class="">Add availability to join</span>
-                                        </span>
-
                                     </div>
 
                                     <div class="d-flex flex-column gap-3 border2">
                                         <span class="d-felx gap-3 text-muted textmuteds">
                                             <i class="ri-phone-line"></i>
-                                            <span class="">7454877544 </span>
+                                            <span class="">
+                                                {{ $user->phone ?? 'N/A' }}
+                                            </span>
                                         </span>
 
                                         <span class="d-felx gap-3 text-muted textmuteds">
                                             <i class="ri-shopping-bag-line"></i>
-                                            <span class="">Add availability to join</span>
+                                            @if ($candidate->availability == '15_days')
+                                                <span>Available within 15 days</span>
+                                            @elseif ($candidate->availability == '1_month')
+                                                <span>Available within 30 days</span>
+                                            @elseif ($candidate->availability == '2_months')
+                                                <span>Available within 60 days</span>
+                                            @elseif ($candidate->availability == '3_months')
+                                                <span>Available within 90 days</span>
+                                            @else
+                                                <span>Availability not specified</span>
+                                            @endif
                                         </span>
                                     </div>
                                 </div>
@@ -85,7 +100,7 @@
                                             Upload
                                         </label>
                                     </li>
-                                    
+
                                     <li>
                                         <span> Key skills </span>
                                         <a href="#skill_add" data-bs-toggle="modal" data-bs-target="#skill_add">Add</a>
@@ -144,9 +159,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
                     <!--- key and skills start-->
                     <div class="card mb-3">
                         <div class="card-body">
@@ -159,17 +171,16 @@
                                 <a class="add_profile_details text-decoration-none" type="button" data-bs-toggle="modal"
                                     data-bs-target="#skill_add">Add skills</a>
                             </div>
-
-                            <ul class="keySkillstype list-unstyled d-flex flex-wrap m-0 ">
-                                <li>It Security</li>
-                                <li>Chat Support</li>
-                                <li>Project Management</li>
-                                <li>It Head</li>
+                            <ul class="keySkillstype list-unstyled d-flex flex-wrap m-0">
+                                @forelse ($skills as $skill)
+                                    <li>{{ $skill }}</li>
+                                @empty
+                                    <li class="text-muted">No skills added yet.</li>
+                                @endforelse
                             </ul>
                         </div>
                     </div>
                     <!--- key and skills end-->
-
 
                     <!--- IT skills start-->
                     <div class="card mb-3">
@@ -178,10 +189,11 @@
                                 <span>
                                     <strong>IT skills</strong>
                                     <a class="text-decoration-none text-dark" data-bs-toggle="modal"
-                                        data-bs-target="#it_skill_add"><i class="ri-pencil-line"></i></a>
+                                        data-bs-target="#it_skill_edit" data-mode="edit"><i
+                                            class="ri-pencil-line"></i></a>
                                 </span>
                                 <a class="add_profile_details text-decoration-none" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#it_skill_add">Add IT skills</a>
+                                    data-bs-target="#it_skill_add" data-mode="add">Add IT skills</a>
                             </div>
 
                             <div class="table-responsive">
@@ -204,7 +216,7 @@
                                             <td>
                                                 <div class="d-flex gap-3">
                                                     <button class="border-0 bg-transparent" data-bs-toggle="modal"
-                                                        data-bs-target="#it_skill_add"><i
+                                                        data-bs-target="#it_skill_edit"><i
                                                             class="ri-pencil-line"></i></button>
                                                     <button class="border-0 bg-transparent" type="button"
                                                         id="delete_skill"><i class="ri-delete-bin-line"></i></button>
@@ -234,15 +246,46 @@
                                 <div class="companys">
                                     <p class="m-0">
                                         <strong class="text-muted p_font">
-                                            Front End Developer
+                                            {{ $candidate->job_title }}
                                             <a class="text-decoration-none text-dark" data-bs-toggle="modal"
                                                 data-bs-target="#employment"><i class="ri-pencil-line"></i></a>
                                         </strong>
                                     </p>
-                                    <p class="p_font m-0">Infosys</p>
-                                    <p class="text-muted p_font m-0">15 Days or less Notice Period</p>
-                                    <p class="m-0 text-muted p_font"><span>Full-time</span> | Feb 2024 to Present (1 year 5
-                                        months)</p>
+                                    <p class="p_font m-0">{{ $candidate->company_name }}</p>
+                                    <p class="text-muted p_font m-0">
+                                        @if ($candidate->notice_period == '15_days_or_less')
+                                            15 Days or less Notice Period
+                                        @elseif ($candidate->notice_period == '1_month')
+                                            1 Month Notice Period
+                                        @elseif ($candidate->notice_period == '2_months')
+                                            2 Months Notice Period
+                                        @elseif ($candidate->notice_period == '3_months')
+                                            3 Months Notice Period
+                                        @endif
+                                    </p>
+                                    <p class="m-0 text-muted p_font">
+                                        <span>
+                                            @if ($candidate->employment_type == 'full_time')
+                                                Full Time
+                                            @elseif ($candidate->employment_type == 'intern')
+                                                Intern
+                                            @endif
+                                        </span>
+                                        | (
+                                        @if ($candidate->experience > 0)
+                                            {{ $candidate->experience }} {{ Str::plural('Year', $candidate->experience) }}
+                                        @endif
+
+                                        @if ($candidate->experience > 0 && $candidate->experience_month > 0)
+                                            {{ ' ' }}
+                                        @endif
+
+                                        @if ($candidate->experience_month > 0)
+                                            {{ $candidate->experience_month }}
+                                            {{ Str::plural('Month', $candidate->experience_month) }}
+                                        @endif
+                                        )
+                                    </p>
                                 </div>
                             </div>
 
@@ -321,22 +364,14 @@
                                 <span>
                                     <strong>Profile summary</strong>
                                     <a class="text-decoration-none text-dark" data-bs-toggle="modal"
-                                        data-bs-target="#profile_summry"><i class="ri-pencil-line"></i></a>
+                                        data-bs-target="#add_profile_summry"><i class="ri-pencil-line"></i></a>
                                 </span>
                                 <a class="add_profile_details text-decoration-none" type="button" data-bs-toggle="modal"
                                     data-bs-target="#profile_summry">Add Profile summary </a>
                             </div>
 
                             <p style="font-size: 14px;">
-                                A highly skilled and creative Front-End Developer with 2 years of experience in designing,
-                                developing,
-                                and maintaining responsive and user-friendly web applications. Proficient in HTML, CSS,
-                                JavaScript, jquery and React js also with extensive
-                                experience in modern frameworks such as React js
-                                . Adept at collaborating with cross-functional teams to deliver high-quality projects that
-                                enhance user experiences. Strong problem-solving skills,
-                                attention to detail, and a passion for staying current with the latest industry trends and
-                                technologies.
+                                {{ $candidate->profile_summary }}
                             </p>
 
                         </div>
@@ -416,4 +451,172 @@
 
         </div>
     </section>
+@endsection
+
+@section('user_profile_modal')
+    @if (session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: '{{ session('success') }}',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ session('error') }}'
+            });
+        </script>
+    @endif
+
+    <script>
+        $(document).ready(function() {
+            $('#skill-add-form').on('submit', function(e) {
+                e.preventDefault();
+                let formData = new FormData(this);
+                $.ajax({
+                    url: "{{ route('frontend.update-skills') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        });
+                        $('#skill_add').modal('hide');
+                    },
+                });
+            });
+            $('#add-employment-form').on('submit', function(e) {
+                e.preventDefault();
+                let formData = new FormData(this);
+
+                $.ajax({
+                    url: "{{ route('frontend.add-employment') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        }).then(() => {
+                            $('#employment').modal('hide');
+                            location.reload();
+                        });
+                    },
+                });
+            });
+            $('#itskill-add-form').on('submit', function(e) {
+                e.preventDefault();
+                let formData = new FormData(this);
+
+                $.ajax({
+                    url: "{{ route('frontend.add-itskill') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                            'content')
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        }).then(() => {
+                            $('#it_skill_add').modal('hide');
+                            location.reload();
+                        });
+                    },
+                });
+            });
+
+            $('#add-profile-summary').on('submit', function(e) {
+                e.preventDefault();
+                let formData = new FormData(this);
+                $.ajax({
+                    url: "{{ route('frontend.add-profile-summary') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        }).then(() => {
+                            $('#profile_summry').modal('hide');
+                            location.reload();
+                        });
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Something went wrong!',
+                        });
+                    }
+                });
+            });
+
+            $('#add-education-form').on('submit', function(e) {
+                e.preventDefault();
+                let formData = new FormData(this);
+                $.ajax({
+                    url: "{{ route('frontend.add-education-details') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        }).then(() => {
+                            $('#education').modal('hide');
+                            location.reload();
+                        });
+                    },
+                    error: function(e) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Something went wrong!',
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

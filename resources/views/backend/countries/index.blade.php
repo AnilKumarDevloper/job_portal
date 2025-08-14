@@ -83,13 +83,13 @@
                                                         <td class="">
                                                             <p>{{ $country->name }}</p>
                                                         </td>
-                                                        <td class="">
+                                                        <td class="text-center">
                                                             <div class="d-flex justify-content-center">
                                                                 <span
                                                                     class="badge font-weight-medium  bg-light-info text-info ">{{ $country->iso2 }}</span>
                                                             </div>
                                                         </td>
-                                                        <td class="d-flex justify-content-center">
+                                                        <td class="text-center">
                                                             <span
                                                                 class="badge font-weight-medium  bg-light-primary text-primary border-0">{{ $country->phonecode }}</span>
                                                         </td>
@@ -295,7 +295,7 @@
         </div>
     </div>
 
-    <!--  country_code_add  -->
+    <!--  country_code_edit  -->
     <div class="modal fade" id="country_code_edit" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">

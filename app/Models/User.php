@@ -4,11 +4,16 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Backend\CondidateDetail;
+use App\Models\Backend\EmployerDetail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Backend\City;
+use App\Models\Backend\Country;
+use App\Models\Backend\Industry;
+use App\Models\Backend\State;
 
 class User extends Authenticatable
 {
@@ -31,9 +36,9 @@ class User extends Authenticatable
         'status',
         'first_name',
         'last_name',
-        'country',
-        'state',
-        'city',
+        'country_id',
+        'state_id',
+        'city_id',
         'gender',
         'field',
         'is_experienced',
@@ -66,6 +71,11 @@ class User extends Authenticatable
         return $this->hasOne(CondidateDetail::class, 'user_id');
     }
 
+    public function getEmployerDetails()
+    {
+        return $this->hasOne(EmployerDetail::class, 'user_id');
+    }
+
     public function getCreatedBy()
     {
         return $this->belongsTo(User::class, 'created_by');
@@ -73,5 +83,25 @@ class User extends Authenticatable
     public function getAmendedBy()
     {
         return $this->belongsTo(User::class, 'amended_by');
+    }
+
+    public function candidateDetail()
+    {
+        return $this->hasOne(CondidateDetail::class, 'user_id');
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id');
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state_id');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
     }
 }
